@@ -1,0 +1,19 @@
+# US Day Trader skill review
+
+Reviewed [upstream commit `3d0f4ef`](https://github.com/Jakeschincariol/day-trader-skill/tree/3d0f4ef6986f4984b7c6bd46f7ff4f87744c3abd) and its 11 skill directories, scripts, example configuration and test fixtures. The original uses plain Python tools, structured hand-offs, completed-bar triggers, a risk check before approval, and an offline reproducible walkthrough. Those design choices carry over. The original’s US symbol, filing, session, fee and broker assumptions change with the venue.
+
+| Upstream skill | India Day Trader implementation |
+| --- | --- |
+| Scanner | Use NSE constituent lists or an explicit watchlist. `premarket` preserves range contraction, prior-high and daily momentum checks. Intraday scans add VWAP structures, elapsed-session relative volume, INR turnover, opening-gap filters, aligned index-relative returns and supplied-universe breadth. |
+| News | Search recent Upstox headlines when authorised. Review exchange-published issuer announcements, board meetings, corporate actions and macro event timestamps from CSV. SEC 8-K categories and US feeds give way to NSE/BSE filing sources. |
+| Entry | Keep closed-bar evidence and first qualifying confirmation per setup. Bind bars to the 09:15 continuous open in IST, align the volume baseline to the same elapsed session time, and reject missing current candle slots. |
+| Exit | Use an opening-range midpoint or setup-specific structural stop. Quantize stop and target using the dated NSE tick size at paper admission and replay. Apply earlier flat deadlines around auction and broker cutoffs. |
+| Time Machine | Re-run the first signal on prior sessions and separately resample complete historical future paths for the current plan. Preserve intraday sequencing within each path, model next-bar entry, account for fees and disclose path count and unresolved outcomes. |
+| Budget | Size whole shares against INR paper cash, maximum allocation, worst accepted entry, stop slippage, and estimated transaction charges. |
+| Risk | Recheck exact terms against daily loss, committed risk, trade count, expiry, position limits, same-day instrument evidence, price bands and cutoffs. US PDT and margin provisions have no role in this model. |
+| Broker | Use a single exact digest and SQLite transactions for explicit paper confirmation. Advance fills with subsequent completed bars and reconcile unresolved local exposure. Upstox V3 is a separate read-only data adapter. A broker-specific live path needs its own implementation and applicable exchange controls. |
+| Alerts | Price-level touches and IST clock events, emitted once per local rule ID from refreshed candle inputs. Each observation includes its candle close time. |
+| Analyst | Compare as-filed comparable quarters with consolidated/standalone and unit labels. Use NSE/BSE exchange filings and source-linked facts in place of SEC XBRL. |
+| Pelosi tracker | Use company-associated PIT/SAST filings, shareholding/pledge data and NSE/BSE bulk/block trades. Check event vs publication time and infer no near-term direction from a filing alone. |
+
+The usable first release keeps one common NSE continuous window across cash symbols during the initial closing-auction phase. It uses a single benchmark series per scan or replay. Users can supply either Nifty 50 or a mapped sector index and review GIFT Nifty, India VIX, FII/DII, broader sector context and event calendars separately. Data licensing, authorised credentials, historical coverage and dated surveillance evidence remain dependencies for a market-data run. The synthetic fixtures reproduce expected outcomes without requiring those inputs. [Indian market requirements and primary sources](india-market.md)

@@ -1,0 +1,36 @@
+{
+  "signals": {
+    "require_benchmark": true,
+    "opening_range_min": 15,
+    "min_median_daily_turnover_inr": 100000000,
+    "min_cumulative_rvol": 1.15,
+    "min_bar_rvol": 1.35,
+    "max_abs_gap_bps": 350,
+    "max_trigger_extension_bps": 80
+  },
+  "risk": {
+    "initial_cash": 100000,
+    "max_trade_risk": 500,
+    "max_daily_loss": 1500,
+    "max_trades_per_day": 3,
+    "max_open_positions": 2,
+    "max_position_fraction": 0.25,
+    "min_net_rr": 1.25,
+    "entry_deadline": "14:45",
+    "square_off": "15:05",
+    "ticket_ttl_minutes": 5,
+    "max_signal_age_minutes": 15,
+    "max_entry_drift_bps": 20,
+    "costs": {
+      "brokerage_rate": 0.0003,
+      "brokerage_cap": 20,
+      "exchange_rate": 0.0000307,
+      "sebi_rate": 0.000001,
+      "stamp_rate": 0.00003,
+      "stt_rate": 0.00025,
+      "gst_rate": 0.18,
+      "slippage_bps": 5,
+      "checked_on": "2026-11-26"
+    }
+  }
+}

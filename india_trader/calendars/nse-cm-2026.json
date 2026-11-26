@@ -1,0 +1,41 @@
+{
+  "id": "NSE capital market 2026, common continuous window",
+  "checked_on": "2026-11-26",
+  "start": "2026-01-01",
+  "end": "2026-12-31",
+  "holidays": {
+    "2026-01-15": "Maharashtra municipal corporation election",
+    "2026-01-26": "Republic Day",
+    "2026-03-03": "Holi",
+    "2026-03-26": "Shri Ram Navami",
+    "2026-03-31": "Shri Mahavir Jayanti",
+    "2026-04-03": "Good Friday",
+    "2026-04-14": "Dr. B. R. Ambedkar Jayanti",
+    "2026-05-01": "Maharashtra Day",
+    "2026-05-28": "Bakri Id",
+    "2026-06-26": "Muharram",
+    "2026-09-14": "Ganesh Chaturthi",
+    "2026-10-02": "Mahatma Gandhi Jayanti",
+    "2026-10-20": "Dussehra",
+    "2026-11-10": "Diwali Balipratipada",
+    "2026-11-24": "Guru Nanak Jayanti",
+    "2026-12-25": "Christmas"
+  },
+  "exceptions": {
+    "2026-02-01": {"kind": "regular", "hours": ["09:15", "15:30"], "note": "Union Budget live Sunday session"},
+    "2026-11-08": {"kind": "excluded", "note": "Muhurat special session outside the regular model"}
+  },
+  "regimes": [
+    {"start": "2026-01-01", "end": "2026-08-02", "hours": ["09:15", "15:30"]},
+    {"start": "2026-08-03", "end": "2026-12-06", "hours": ["09:15", "15:15"]},
+    {"start": "2026-12-07", "end": "2026-12-31", "hours": ["09:15", "15:30"]}
+  ],
+  "sources": [
+    "https://archives.nseindia.com/content/circulars/CMTR71775.pdf",
+    "https://nsearchives.nseindia.com/content/circulars/CMTR72260.pdf",
+    "https://nsearchives.nseindia.com/content/circulars/CMTR72349.pdf",
+    "https://www.nseindia.com/resources/exchange-communication-holidays",
+    "https://www.nseindia.com/static/products-services/closing-auction-session",
+    "https://nsearchives.nseindia.com/web/mediaattachment/2026-11/FAQs_for_CM_and_FO_FOR_CAS_2.0_20261109152618.pdf"
+  ]
+}
