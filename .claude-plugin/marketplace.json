@@ -1,0 +1,14 @@
+{
+  "name": "indian-day-trader-skills",
+  "description": "NSE intraday research and paper trading skills for Claude Code.",
+  "owner": {
+    "name": "Harshil4442"
+  },
+  "plugins": [
+    {
+      "name": "indian-day-trader-skills",
+      "source": "./",
+      "description": "Eleven NSE cash-equity skills for intraday research, historical replay, and local paper trading."
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # India Day Trader
 
-India Day Trader is a local Python toolkit and four agent skills for NSE cash-equity intraday research and paper trading. It follows the research-to-ticket workflow of Jake Schincariol’s US [Day Trader skill](https://github.com/Jakeschincariol/day-trader-skill), with Indian exchange sessions, instruments, disclosures and INR costs.
+India Day Trader is a local Python toolkit with 11 standalone agent skills for NSE cash-equity intraday research and paper trading. It follows the research-to-ticket workflow of Jake Schincariol’s US [Day Trader skill](https://github.com/Jakeschincariol/day-trader-skill), with Indian exchange sessions, instruments, disclosures and INR costs.
 
 - **Scan** a watchlist or an NSE Indices constituent export. Research opening-range breakouts, VWAP reclaims and trend pullbacks on completed five-minute candles. Inspect aligned Nifty or sector-relative returns, elapsed-session relative volume, liquidity, gap size and breadth coverage.
 - **Replay** earlier occurrences using point-in-time inputs, modeled fills and fees. Resample complete historical price paths for a fresh plan and see how many distinct sessions support the results.
@@ -8,6 +8,26 @@ India Day Trader is a local Python toolkit and four agent skills for NSE cash-eq
 - **Review market context** with news headlines, exchange announcements, earnings, bulk/block deals and insider disclosures. Local alerts detect level touches and IST deadlines.
 
 The initial scope is long-only, unleveraged NSE main-board cash equities. The only broker integration reads market data. Orders and positions live in a local SQLite paper ledger. The included data and walk-through are synthetic. Parameters are research defaults awaiting validation on representative Indian market history.
+
+## The 11 skills
+
+Each folder is visible at the repository root and contains its own `SKILL.md`. The skills share the Python toolkit under `india_trader/`.
+
+| Skill | Workflow |
+| --- | --- |
+| [`trader-scanner`](trader-scanner/SKILL.md) | Review daily setups and scan an NSE watchlist for intraday candidates |
+| [`trader-news`](trader-news/SKILL.md) | Check headlines, exchange announcements and upcoming market events |
+| [`trader-entry`](trader-entry/SKILL.md) | Check whether a setup has confirmed on a completed five-minute candle |
+| [`trader-exit`](trader-exit/SKILL.md) | Set a structural stop, target and modeled square-off time |
+| [`trader-timemachine`](trader-timemachine/SKILL.md) | Replay prior signals and run seeded scenarios for a fresh plan |
+| [`trader-budget`](trader-budget/SKILL.md) | Size an INR paper ticket after charges, cash and allocation limits |
+| [`trader-risk`](trader-risk/SKILL.md) | Check eligibility, price bands, exposure, loss limits and ticket expiry |
+| [`trader-broker`](trader-broker/SKILL.md) | Confirm, advance, cancel and reconcile exact local paper tickets |
+| [`trader-alerts`](trader-alerts/SKILL.md) | Check one-shot price touches and IST clock reminders |
+| [`trader-analyst`](trader-analyst/SKILL.md) | Compare source-linked NSE or BSE quarterly results |
+| [`trader-disclosures`](trader-disclosures/SKILL.md) | Review bulk and block deals, PIT/SAST filings, shareholding and pledges |
+
+`trader-disclosures` is the Indian counterpart to the US pack’s `trader-pelosi`. [Upstream workflow mapping](docs/upstream-review.md)
 
 ## Run the offline walkthrough
 
@@ -61,15 +81,17 @@ python3 -m india_trader fetch-bars NIFTY50 --key 'NSE_INDEX|Nifty 50' --output s
 
 Fetch prior sessions for the benchmark as well when running replay. The included calendar covers 2026 and excludes auction candles. It uses the shared conservative 15:15 continuous cutoff from 3 August through 6 December, then the published 15:30 session from 7 December. Pass `--calendar` before the command to use an updated or historical file. [NSE closing-auction rules](https://www.nseindia.com/static/products-services/closing-auction-session) · [NSE December timetable](https://nsearchives.nseindia.com/web/mediaattachment/2026-11/FAQs_for_CM_and_FO_FOR_CAS_2.0_20261109152618.pdf)
 
-## Agent skills
+## Use the agent skills
 
-Codex can discover these skills in this checkout under `.agents/skills/`. Invoke the matching `$skill-name` from the repo. For Claude Code, copy the four skill directories into this checkout’s `.claude/skills/` so their local documentation links resolve.
+In Codex, open this checkout and select the workflow from the `$` skill picker. Look for `trader-scanner` or `indian-day-trader-skills:trader-scanner`, depending on how the client loads the pack. The `.agents/skills/` directory links each entry to its top-level skill folder.
 
-| Skill | Workflow |
-| --- | --- |
-| [`india-day-trader`](.agents/skills/india-day-trader/SKILL.md) | Universe, daily structures, scan, entry, exit planning and alerts |
-| [`india-trade-replay`](.agents/skills/india-trade-replay/SKILL.md) | Historical strategy replay and seeded current-plan scenarios |
-| [`india-paper-trader`](.agents/skills/india-paper-trader/SKILL.md) | INR budget, risk limits, ticket confirmation and local paper journal |
-| [`india-market-filings`](.agents/skills/india-market-filings/SKILL.md) | News, corporate events, filed earnings and ownership disclosures |
+In Claude Code, start from this checkout. Load the pack for the current session with `claude --plugin-dir .`, or add it as a marketplace and install it in the project:
+
+```text
+/plugin marketplace add Harshil4442/Indian-day-trader-skills
+/plugin install indian-day-trader-skills@indian-day-trader-skills
+```
+
+Invoke a plugin skill such as `/indian-day-trader-skills:trader-scanner`. The workflows run the shared Python toolkit from the checkout.
 
 See the [upstream review and localization decisions](docs/upstream-review.md), the [Indian market reference](docs/india-market.md) and the [data contract](docs/data-and-workflow.md). Run the offline tests with `python3 -m unittest discover -s tests -v`.

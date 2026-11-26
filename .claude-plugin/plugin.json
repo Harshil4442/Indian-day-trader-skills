@@ -1,0 +1,24 @@
+{
+  "name": "indian-day-trader-skills",
+  "description": "Eleven NSE cash-equity skills for intraday research, historical replay, and local paper trading.",
+  "version": "0.2.0",
+  "homepage": "https://github.com/Harshil4442/Indian-day-trader-skills",
+  "repository": "https://github.com/Harshil4442/Indian-day-trader-skills",
+  "skills": [
+    "./trader-scanner",
+    "./trader-news",
+    "./trader-entry",
+    "./trader-exit",
+    "./trader-timemachine",
+    "./trader-budget",
+    "./trader-risk",
+    "./trader-broker",
+    "./trader-alerts",
+    "./trader-analyst",
+    "./trader-disclosures"
+  ],
+  "author": {
+    "name": "Harshil4442",
+    "url": "https://github.com/Harshil4442"
+  }
+}
